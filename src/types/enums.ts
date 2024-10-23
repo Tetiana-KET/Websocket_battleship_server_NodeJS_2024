@@ -1,5 +1,5 @@
 export enum RequestEnum {
-	Reg = 'reg ',
+	Reg = 'reg',
 	CreateGame = 'create_game',
 	StartGame = 'start_game',
 	Turn = 'turn', //who is shooting now
