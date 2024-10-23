@@ -10,29 +10,43 @@
 
 ## Running the Application
 
-- Clone this repository.
-- Switch to the `develop` branch
-  ```
-  git switch develop
-  ```
-- Install dependencies
-  ```
-  npm install
-  ```
-- Set the port value in the `.env` file.
-- Start the application. There are 2 modes to run the application:
+1. Clone this repository.
+
+2. Switch to the `develop` branch
+
+```
+git switch develop
+```
+
+3. Install dependencies
+
+```
+npm install
+```
+
+4. Set the port value in the `.env` file.
+
+5. Start the application: You can run the application in two modes:
 
 **Development**
 
-`npm run start:dev`
+```
+npm run start:dev
+```
 
-- Start the application in development mode with nodemon, both http and websocket servers
+- Starts the application in development mode using nodemon.
+- Automatically restarts the server when code changes are detected.
+- Launches both the HTTP and WebSocket servers, allowing you to test real-time and standard request-response functionalities in development.
 
 **Production**
 
-`npm run start`
+```
+npm start
+```
 
-- Build the application (http and websocket servers)
+- Starts the application in production mode.
+  - Builds the application by running the build script (compile/transpile source code).
+  - Starts the application by running the generated code (dist/bundle.js) with Node.js.
 
 ---
 
