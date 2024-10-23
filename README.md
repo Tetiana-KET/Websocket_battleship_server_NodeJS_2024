@@ -1,6 +1,6 @@
 ## RSSchool NodeJS websocket task template
 
-> Static http server and base task packages.
+> Static http server served on http://localhost:8181
 > By default WebSocket client tries to connect to the 3000 port.
 
 ## Prerequisites
