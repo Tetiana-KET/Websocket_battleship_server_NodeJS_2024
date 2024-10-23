@@ -1,0 +1,30 @@
+{
+	"name": "websocket-battleship-task",
+	"version": "1.0.0",
+	"description": "The task is to implement battleship game backend with websocket, using predefined template for Player interface.",
+	"main": "index.js",
+	"type": "module",
+	"scripts": {
+		"start": "node ./index.js",
+		"start:dev": "nodemon ./index.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"contributors": [
+		{
+			"name": "Andrei Auchynnikau",
+			"role": "Frontend"
+		},
+		{
+			"name": "Tatiana Bezkorovaina",
+			"role": "Websocket battleship server"
+		}
+	],
+	"keywords": [],
+	"license": "ISC",
+	"devDependencies": {
+		"nodemon": "^2.0.16"
+	},
+	"dependencies": {
+		"ws": "^8.8.0"
+	}
+}
