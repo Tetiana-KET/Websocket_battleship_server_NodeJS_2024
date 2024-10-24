@@ -2,8 +2,9 @@ import WebSocket from 'ws';
 import { v4 as generateID } from 'uuid';
 import { printMessageToConsole } from '../utils/printMessageToConsole';
 import { RequestType } from '../types/interfaces';
-import { RequestEnum } from '../types/enums';
+import { InteractionEnum } from '../types/enums';
 import { registerUser } from '../controllers/registerUser';
+import { DB } from '../store/store';
 
 export function startWebSocketServer(port: number) {
 	const websocketServer = new WebSocket.Server({ port });
@@ -20,6 +21,8 @@ export function startWebSocketServer(port: number) {
 			'success'
 		);
 
+		DB.wsDB.set(idPlayer, ws);
+
 		ws.on('message', message => {
 			try {
 				const { type, data }: RequestType = JSON.parse(message.toString());
@@ -27,7 +30,7 @@ export function startWebSocketServer(port: number) {
 				printMessageToConsole(`Received request of type: "${type}"`, 'request');
 
 				switch (type) {
-					case RequestEnum.Reg:
+					case InteractionEnum.Reg:
 						registerUser(idPlayer, data);
 						break;
 				}

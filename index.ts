@@ -2,7 +2,7 @@ import { config } from 'dotenv';
 import { httpServer } from './src/http_server/index';
 import { startWebSocketServer } from './src/websocket_server/index';
 import { DEFAULT_HTTP_PORT, DEFAULT_WS_PORT } from './src/consts/defaultPort';
-import { HTTP_PORT_MSG } from './src/consts/consoleMessages';
+import { HTTP_PORT_MSG } from './src/consts/messages';
 import { printMessageToConsole } from './src/utils/printMessageToConsole';
 config();
 

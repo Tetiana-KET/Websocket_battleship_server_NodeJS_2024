@@ -1,4 +1,4 @@
-export enum RequestEnum {
+export enum InteractionEnum {
 	Reg = 'reg',
 	CreateGame = 'create_game',
 	StartGame = 'start_game',
