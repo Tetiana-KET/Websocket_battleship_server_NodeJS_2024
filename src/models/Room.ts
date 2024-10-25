@@ -1,15 +1,9 @@
-import {
-	GameBoardInterface,
-	ShipsInterface,
-	UserInterface,
-} from '../types/interfaces';
+import { UserInterface } from '../types/interfaces';
 import { v4 as generateID } from 'uuid';
 
 export class Room {
 	public roomId: string;
 	public players: UserInterface[] = [];
-	public gameBoard: GameBoardInterface = {};
-	public ships: ShipsInterface = {};
 
 	constructor(user: UserInterface) {
 		this.roomId = generateID();

@@ -1,7 +1,7 @@
 import { USER_HAS_ROOM } from '../consts/messages';
-import { Game } from '../models/Game';
 import { DB } from '../store/store';
 import { printMessageToConsole } from '../utils/printMessageToConsole';
+import { createGame } from './createGame';
 import { updateRooms } from './updateRooms';
 
 // add yourself to somebody's room, then remove the room from available rooms list
@@ -19,10 +19,7 @@ export function addUserToRoom(userId: string, data: string) {
 
 	if (user) {
 		room?.addUserToRoom(user);
-		printMessageToConsole(
-			`Add user "${user.name}" to somebody's room with roomID: ${indexRoom}.`,
-			'request'
-		);
+		createGame(indexRoom);
 	}
 
 	DB.roomData.delete(indexRoom);

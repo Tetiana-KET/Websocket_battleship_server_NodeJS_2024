@@ -1,16 +1,20 @@
-import { GameRoomInterface, UserInterface } from "../types/interfaces";
+import {
+	GameInterface,
+	RoomInterface,
+	UserInterface,
+} from '../types/interfaces';
 import WebSocket from 'ws';
 
-
 type StoreDb = {
-    playerData: Map<string, UserInterface>;
-    roomData: Map<string, GameRoomInterface>;
-    wsDB: Map<string, WebSocket>
-}
+	playerData: Map<string, UserInterface>;
+	roomData: Map<string, RoomInterface>;
+	gameData: Map<string, GameInterface>;
+	wsDB: Map<string, WebSocket>;
+};
 
 export const DB: StoreDb = {
-    playerData: new Map<string, UserInterface>(),
-    roomData: new Map<string, GameRoomInterface>(),
-    wsDB: new Map<string, WebSocket>()
-}
-
+	playerData: new Map<string, UserInterface>(),
+	roomData: new Map<string, RoomInterface>(),
+	gameData: new Map<string, GameInterface>(),
+	wsDB: new Map<string, WebSocket>(),
+};

@@ -35,10 +35,13 @@ export interface GameBoardInterface {}
 
 export interface ShipsInterface {}
 
-export interface GameRoomInterface {
+export interface RoomInterface {
 	roomId: string;
 	players: UserInterface[];
+	addUserToRoom: (user: UserInterface) => void;
+}
+
+export interface GameInterface {
 	gameBoard: GameBoardInterface;
 	ships: ShipsInterface;
-	addUserToRoom: (user: UserInterface) => void;
 }
