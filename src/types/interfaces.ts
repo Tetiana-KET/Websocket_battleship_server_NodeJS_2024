@@ -27,6 +27,7 @@ export interface UserInterface {
 	name: string;
 	password: string;
 	id: string;
+	rooms: string[];
 	addGameRoom: (id: string) => void;
 }
 

@@ -6,6 +6,7 @@ import { ServerRegResponse, UserInterface } from '../types/interfaces';
 import { generateWsServerResponse } from '../utils/generateWsServerResponse';
 import { printMessageToConsole } from '../utils/printMessageToConsole';
 import { validateDoesUserExist } from '../utils/validateDoesUserExist';
+import { updateRooms } from './updateRooms';
 
 export function registerUser(id: string, data: string) {
 	const { name, password } = JSON.parse(data);
@@ -34,4 +35,5 @@ export function registerUser(id: string, data: string) {
 	);
 
 	DB.wsDB.get(id)?.send(response);
+	!doesUserExist && updateRooms();
 }
