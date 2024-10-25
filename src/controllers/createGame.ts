@@ -11,7 +11,7 @@ export function createGame(indexRoom: string) {
 		game.addPlayer(player.id);
 
 		const createGameData = {
-			idGame: game.idGame,
+			idGame: game.gameId,
 			idPlayer: player.id,
 		};
 
@@ -21,5 +21,9 @@ export function createGame(indexRoom: string) {
 		);
 
 		DB.wsDB.get(player.id)?.send(response);
+
+		player.rooms.forEach(room => DB.roomData.delete(room));
+		player.clearRoom();
 	});
+	DB.gameData.set(game.gameId, game);
 }

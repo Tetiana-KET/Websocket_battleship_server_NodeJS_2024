@@ -20,8 +20,7 @@ export function addUserToRoom(userId: string, data: string) {
 	if (user) {
 		room?.addUserToRoom(user);
 		createGame(indexRoom);
+		DB.roomData.delete(indexRoom);
+		updateRooms();
 	}
-
-	DB.roomData.delete(indexRoom);
-	updateRooms();
 }

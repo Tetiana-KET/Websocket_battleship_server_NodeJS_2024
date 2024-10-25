@@ -2,7 +2,7 @@ import { USER_EXIST } from '../consts/messages';
 import { User } from '../models/User';
 import { DB } from '../store/store';
 import { InteractionEnum } from '../types/enums';
-import { ServerRegResponse, UserInterface } from '../types/interfaces';
+import { ServerRegResponseData, UserInterface } from '../types/interfaces';
 import { generateWsServerResponse } from '../utils/generateWsServerResponse';
 import { printMessageToConsole } from '../utils/printMessageToConsole';
 import { validateDoesUserExist } from '../utils/validateDoesUserExist';
@@ -22,7 +22,7 @@ export function registerUser(id: string, data: string) {
 		DB.playerData.set(id, new User(name, password, id));
 	}
 
-	const userData: ServerRegResponse = {
+	const userData: ServerRegResponseData = {
 		name: name,
 		index: id,
 		error: doesUserExist,

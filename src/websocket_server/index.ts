@@ -7,6 +7,7 @@ import { printMessageToConsole } from '../utils/printMessageToConsole';
 import { registerUser } from '../controllers/registerUser';
 import { createNewRoom } from '../controllers/createNewRoom';
 import { addUserToRoom } from '../controllers/addUserToRoom';
+import { addShips } from '../controllers/addShips';
 
 export function startWebSocketServer(port: number) {
 	const websocketServer = new WebSocket.Server({ port });
@@ -40,6 +41,9 @@ export function startWebSocketServer(port: number) {
 						break;
 					case InteractionEnum.addUserToRoom:
 						addUserToRoom(idPlayer, data);
+						break;
+					case InteractionEnum.AddShips:
+						addShips(data);
 						break;
 				}
 			} catch (error) {

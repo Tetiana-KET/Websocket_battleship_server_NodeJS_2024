@@ -1,10 +1,10 @@
 import { DB } from '../store/store';
 import { InteractionEnum } from '../types/enums';
-import { ServerUpdateRoomResponse } from '../types/interfaces';
+import { ServerUpdateRoomResponseData } from '../types/interfaces';
 import { generateWsServerResponse } from '../utils/generateWsServerResponse';
 
 export function updateRooms() {
-	const rooms: ServerUpdateRoomResponse[] = Array.from(
+	const rooms: ServerUpdateRoomResponseData[] = Array.from(
 		DB.roomData.values()
 	).map(room => ({
 		roomId: room.roomId,

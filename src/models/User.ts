@@ -16,4 +16,8 @@ export class User {
 		this.rooms.push(roomId);
 	}
 	public joinGameRoom() {}
+
+	public clearRoom() {
+		this.rooms = [];
+	}
 }
