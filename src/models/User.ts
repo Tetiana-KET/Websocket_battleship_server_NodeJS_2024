@@ -1,6 +1,6 @@
 export class User {
 	public winsCount: number;
-	public rooms: number[];
+	public rooms: string[];
 	public name: string;
 	public password: string;
 	public id: string;
@@ -12,6 +12,8 @@ export class User {
 		this.password = password;
 		this.id = id;
 	}
-	public createGameRoom() {}
+	public addGameRoom(roomId: string) {
+		this.rooms.push(roomId);
+	}
 	public joinGameRoom() {}
 }

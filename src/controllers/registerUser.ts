@@ -3,7 +3,7 @@ import { User } from '../models/User';
 import { DB } from '../store/store';
 import { InteractionEnum } from '../types/enums';
 import { ServerRegResponse, UserInterface } from '../types/interfaces';
-import { generateWsServerResponce } from '../utils/generateWsServerResponce';
+import { generateWsServerResponse } from '../utils/generateWsServerResponse';
 import { printMessageToConsole } from '../utils/printMessageToConsole';
 import { validateDoesUserExist } from '../utils/validateDoesUserExist';
 
@@ -28,7 +28,7 @@ export function registerUser(id: string, data: string) {
 		errorText: doesUserExist ? USER_EXIST : '',
 	};
 
-	const response = generateWsServerResponce(
+	const response = generateWsServerResponse(
 		InteractionEnum.Reg,
 		JSON.stringify(userData)
 	);
