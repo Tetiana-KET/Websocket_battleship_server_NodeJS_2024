@@ -5,7 +5,7 @@ import { InteractionEnum } from '../types/enums';
 import { ServerRegResponse, UserInterface } from '../types/interfaces';
 import { generateWsServerResponce } from '../utils/generateWsServerResponce';
 import { printMessageToConsole } from '../utils/printMessageToConsole';
-import { validateIsNameVacant } from '../utils/validateIsNameVacant';
+import { validateDoesUserExist } from '../utils/validateDoesUserExist';
 
 export function registerUser(id: string, data: string) {
 	const { name, password } = JSON.parse(data);
@@ -14,21 +14,24 @@ export function registerUser(id: string, data: string) {
 		'request'
 	);
 
-	const users: UserInterface[] = Array.from(DB.playerData.values())
-	const IsNameVacant = validateIsNameVacant(users, name)
+	const users: UserInterface[] = Array.from(DB.playerData.values());
+	const doesUserExist = validateDoesUserExist(users, name, id);
 
-	if (IsNameVacant) {
-		DB.playerData.set(id, new User(name, password, id))
+	if (!doesUserExist) {
+		DB.playerData.set(id, new User(name, password, id));
 	}
 
 	const userData: ServerRegResponse = {
 		name: name,
 		index: id,
-		error: !IsNameVacant,
-		errorText: IsNameVacant ? '' : USER_EXIST
+		error: doesUserExist,
+		errorText: doesUserExist ? USER_EXIST : '',
 	};
-	
-	const response = generateWsServerResponce(InteractionEnum.Reg, JSON.stringify(userData));
 
-	DB.wsDB.get(id)?.send(response)
+	const response = generateWsServerResponce(
+		InteractionEnum.Reg,
+		JSON.stringify(userData)
+	);
+
+	DB.wsDB.get(id)?.send(response);
 }

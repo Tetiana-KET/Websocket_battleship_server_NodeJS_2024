@@ -1,10 +1,11 @@
 import WebSocket from 'ws';
 import { v4 as generateID } from 'uuid';
-import { printMessageToConsole } from '../utils/printMessageToConsole';
 import { RequestType } from '../types/interfaces';
 import { InteractionEnum } from '../types/enums';
-import { registerUser } from '../controllers/registerUser';
 import { DB } from '../store/store';
+import { printMessageToConsole } from '../utils/printMessageToConsole';
+import { registerUser } from '../controllers/registerUser';
+import { createNewRoom } from '../controllers/createNewRoom';
 
 export function startWebSocketServer(port: number) {
 	const websocketServer = new WebSocket.Server({ port });
@@ -32,6 +33,9 @@ export function startWebSocketServer(port: number) {
 				switch (type) {
 					case InteractionEnum.Reg:
 						registerUser(idPlayer, data);
+						break;
+					case InteractionEnum.CreateRoom:
+						createNewRoom(idPlayer);
 						break;
 				}
 			} catch (error) {

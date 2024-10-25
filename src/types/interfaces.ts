@@ -16,11 +16,12 @@ export interface ServerRegResponse {
 export interface UserInterface {
 	name: string;
 	password: string;
- }
+	id: string;
+}
 
-export interface GameBoardInterface { }
+export interface GameBoardInterface {}
 
-export interface ShipsInterface { }
+export interface ShipsInterface {}
 
 export interface GameRoomInterface {
 	players: UserInterface[];
