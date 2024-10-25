@@ -4,4 +4,4 @@ export const WS_PORT_MSG = 'WebSocket server is running on ws://localhost:';
 export const USER_EXIST =
 	'The user with this name or ID already exists, please try again!';
 export const USER_HAS_ROOM =
-	'The user with this name or ID has already created a room!';
+	'The user with this name or ID has already created or entered a room!';

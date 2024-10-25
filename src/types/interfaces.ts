@@ -40,4 +40,5 @@ export interface GameRoomInterface {
 	players: UserInterface[];
 	gameBoard: GameBoardInterface;
 	ships: ShipsInterface;
+	addUserToRoom: (user: UserInterface) => void;
 }
