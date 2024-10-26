@@ -3,6 +3,8 @@ import { DB } from '../store/store';
 import { InteractionEnum } from '../types/enums';
 import { ServerAddShipsResponseData, ShipInterface } from '../types/interfaces';
 import { generateWsServerResponse } from '../utils/generateWsServerResponse';
+import { printMessageToConsole } from '../utils/printMessageToConsole';
+import { sendTurn } from './sendTurn';
 
 export function addShips(data: string) {
 	const { gameId, ships, indexPlayer }: ServerAddShipsResponseData =
@@ -29,13 +31,18 @@ export function addShips(data: string) {
 			};
 
 			const response = generateWsServerResponse(
-				InteractionEnum.AddShips,
+				InteractionEnum.StartGame,
 				JSON.stringify(addShipsData)
 			);
 
 			DB.wsDB.get(playerId)?.send(response);
 
-			console.log('Add ships response: ', JSON.parse(response));
+			printMessageToConsole(
+				`Start The game with ID: ${gameId} for player ${DB.playerData.get(playerId)?.name}\nPlayers ships: ${JSON.stringify(userShips)}\n`,
+				'success'
+			);
 		});
+		game.turn = players[0];
+		sendTurn(game.turn, gameId);
 	}
 }
