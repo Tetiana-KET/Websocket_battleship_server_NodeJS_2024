@@ -1,6 +1,7 @@
 import { DB } from '../store/store';
 import { AttackResult, InteractionEnum, ShipStatus } from '../types/enums';
 import { AttackRequest } from '../types/interfaces';
+import { getSurroundingCoordinates } from '../utils/getSurroundingCoordinates';
 import { sendAttackResponse } from './sendAttackResponse';
 import { sendTurn } from './sendTurn';
 
@@ -49,11 +50,27 @@ export function attackHandler(data: string) {
 			break;
 		case ShipStatus.Killed:
 			opponentBoard?.set(`${x}-${y}`, true);
+
 			sendAttackResponse(
 				{ gameId, x, y, indexPlayer },
 				game,
 				AttackResult.Killed
 			);
+
+			const shipCoordinates = Array.from(ship.shipCellStatus.keys()).map(
+				key => key.split('-').map(Number) as [number, number]
+			);
+
+			const surroundingCoordinates = getSurroundingCoordinates(shipCoordinates);
+
+			surroundingCoordinates.forEach(([sx, sy]) => {
+				opponentBoard?.set(`${sx}-${sy}`, true);
+				sendAttackResponse(
+					{ gameId, x: sx, y: sy, indexPlayer },
+					game,
+					AttackResult.Miss
+				);
+			});
 			break;
 	}
 }
