@@ -1,6 +1,7 @@
 import { DB } from '../store/store';
 import { InteractionEnum } from '../types/enums';
 import { generateWsServerResponse } from '../utils/generateWsServerResponse';
+import { printMessageToConsole } from '../utils/printMessageToConsole';
 
 export function sendTurn(currentPlayerId: string, gameId: string) {
 	const turnData = {
@@ -15,4 +16,7 @@ export function sendTurn(currentPlayerId: string, gameId: string) {
 	DB.gameData
 		.get(gameId)
 		?.players?.forEach(playerId => DB.wsDB.get(playerId)?.send(response));
+
+	const name = DB.playerData.get(currentPlayerId)?.name;
+	printMessageToConsole(`Player with name: ${name} now goes!`);
 }

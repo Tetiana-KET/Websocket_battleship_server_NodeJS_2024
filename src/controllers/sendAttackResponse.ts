@@ -9,10 +9,12 @@ export function sendAttackResponse(
 	game: GameInterface,
 	attackResult: AttackResult
 ) {
-	printMessageToConsole(
-		`Attacked cell: ${x}-${y}\nAttack result: ${attackResult}`,
-		'warn'
-	);
+	if (attackResult !== 'miss') {
+		printMessageToConsole(
+			`Attacked cell: ${x}-${y}\nAttack result: ${attackResult}`,
+			'warn'
+		);
+	}
 
 	const attackResponseData = {
 		gameId,

@@ -18,6 +18,10 @@ export function addShips(data: string) {
 
 	if (game) {
 		game.addPlayerShips(indexPlayer, userShips);
+		printMessageToConsole(
+			`Ships added!\nPlayers ships: ${JSON.stringify(userShips)}\n`,
+			'success'
+		);
 	}
 
 	if (game?.ships.size === 2) {
@@ -38,7 +42,7 @@ export function addShips(data: string) {
 			DB.wsDB.get(playerId)?.send(response);
 
 			printMessageToConsole(
-				`Start The game with ID: ${gameId} for player ${DB.playerData.get(playerId)?.name}\nPlayers ships: ${JSON.stringify(curPlayerShips)}\n`,
+				`Start The game with ID: ${gameId} for player ${DB.playerData.get(playerId)?.name}\n`,
 				'success'
 			);
 		});

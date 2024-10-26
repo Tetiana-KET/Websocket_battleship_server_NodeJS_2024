@@ -2,6 +2,7 @@ import { DB } from '../store/store';
 import { AttackResult, InteractionEnum, ShipStatus } from '../types/enums';
 import { AttackRequest } from '../types/interfaces';
 import { getSurroundingCoordinates } from '../utils/getSurroundingCoordinates';
+import { printMessageToConsole } from '../utils/printMessageToConsole';
 import { sendAttackResponse } from './sendAttackResponse';
 import { sendTurn } from './sendTurn';
 
@@ -22,6 +23,11 @@ export function attackHandler(data: string) {
 	if (!ship) {
 		opponentBoard?.set(`${x}-${y}`, true);
 		sendAttackResponse({ gameId, x, y, indexPlayer }, game, AttackResult.Miss);
+
+		printMessageToConsole(
+			`Attacked cell: ${x}-${y}\nAttack result: ${AttackResult.Miss}`,
+			'warn'
+		);
 
 		if (opponentId && game) {
 			game.turn = opponentId;

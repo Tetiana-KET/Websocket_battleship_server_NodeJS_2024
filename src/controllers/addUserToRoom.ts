@@ -22,5 +22,9 @@ export function addUserToRoom(userId: string, data: string) {
 		createGame(indexRoom);
 		DB.roomData.delete(indexRoom);
 		updateRooms();
+		printMessageToConsole(
+			`User ${user.name} was added to room ${indexRoom}`,
+			'success'
+		);
 	}
 }
