@@ -8,6 +8,7 @@ import { registerUser } from '../controllers/registerUser';
 import { createNewRoom } from '../controllers/createNewRoom';
 import { addUserToRoom } from '../controllers/addUserToRoom';
 import { addShips } from '../controllers/addShips';
+import { attackHandler } from '../controllers/attackHandler';
 
 export function startWebSocketServer(port: number) {
 	const websocketServer = new WebSocket.Server({ port });
@@ -44,6 +45,9 @@ export function startWebSocketServer(port: number) {
 						break;
 					case InteractionEnum.AddShips:
 						addShips(data);
+						break;
+					case InteractionEnum.Attack:
+						attackHandler(data);
 						break;
 				}
 			} catch (error) {

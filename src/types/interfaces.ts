@@ -1,4 +1,4 @@
-import { InteractionEnum } from './enums';
+import { InteractionEnum, ShipStatus } from './enums';
 
 // SERVER INTERACTIONS: RES-REQ
 
@@ -24,6 +24,19 @@ export interface ServerRegResponseData {
 export interface ServerUpdateRoomResponseData {
 	roomId: string;
 	roomUsers: UserResponseData[];
+}
+
+export interface AttackRequest {
+	gameId: string;
+	x: number;
+	y: number;
+	indexPlayer: string;
+}
+
+export interface ServerAttackResponse {
+	position: ShipPosition;
+	currentPlayer: string;
+	status: 'miss' | 'killed' | 'shot';
 }
 
 // USER
@@ -64,6 +77,8 @@ export interface ShipInterface {
 	direction: boolean;
 	type: 'small' | 'medium' | 'large' | 'huge';
 	length: number;
+	shipCellStatus: Map<string, boolean>;
+	getStatus: () => ShipStatus;
 }
 
 export interface GameInterface {
@@ -74,4 +89,5 @@ export interface GameInterface {
 	turn: string;
 	addPlayer: (playerId: string) => void;
 	addPlayerShips: (playerId: string, ships: ShipInterface[]) => void;
+	createGameBoard: (playerId: string) => void;
 }

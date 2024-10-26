@@ -10,3 +10,14 @@ export enum InteractionEnum {
 	Attack = 'attack', //coordinates of shot and status
 	Finish = 'finish', // id of the winner
 }
+
+export enum ShipStatus {
+	Killed = 'killed',
+	Shot = 'shot',
+}
+
+export enum AttackResult {
+	Killed = 'killed',
+	Shot = 'shot',
+	Miss = 'miss',
+}

@@ -21,4 +21,17 @@ export class Game {
 	public addPlayerShips(playerId: string, ships: ShipInterface[]) {
 		this.ships.set(playerId, ships);
 	}
+
+	public createGameBoard(playerId: string) {
+		const boardSize = 10;
+		const gameBoardMap = new Map();
+
+		for (let x = 0; x < boardSize; x++) {
+			for (let y = 0; y < boardSize; y++) {
+				gameBoardMap.set(`${x}-${y}`, false);
+			}
+		}
+
+		this.gameBoard.set(playerId, gameBoardMap);
+	}
 }

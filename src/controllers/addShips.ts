@@ -38,7 +38,7 @@ export function addShips(data: string) {
 			DB.wsDB.get(playerId)?.send(response);
 
 			printMessageToConsole(
-				`Start The game with ID: ${gameId} for player ${DB.playerData.get(playerId)?.name}\nPlayers ships: ${JSON.stringify(userShips)}\n`,
+				`Start The game with ID: ${gameId} for player ${DB.playerData.get(playerId)?.name}\nPlayers ships: ${JSON.stringify(curPlayerShips)}\n`,
 				'success'
 			);
 		});
