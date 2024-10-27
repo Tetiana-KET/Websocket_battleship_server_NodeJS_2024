@@ -10,6 +10,7 @@ import { addUserToRoom } from '../controllers/addUserToRoom';
 import { addShips } from '../controllers/addShips';
 import { attackHandler } from '../controllers/attackHandler';
 import { randomAttackHandler } from '../controllers/randomAttackHandler';
+import { handleConnectionClose } from '../utils/handleConnectionClose';
 
 export function startWebSocketServer(port: number) {
 	const websocketServer = new WebSocket.Server({ port });
@@ -60,10 +61,7 @@ export function startWebSocketServer(port: number) {
 		});
 
 		ws.on('close', () => {
-			printMessageToConsole(
-				`The player with ID: "${idPlayer}" disconnected!`,
-				'warn'
-			);
+			handleConnectionClose(ws, idPlayer);
 		});
 
 		ws.on('error', error => {
