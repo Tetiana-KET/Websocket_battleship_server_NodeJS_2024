@@ -26,11 +26,14 @@ export interface ServerUpdateRoomResponseData {
 	roomUsers: UserResponseData[];
 }
 
-export interface AttackRequest {
+export interface RandomAttackRequest {
 	gameId: string;
+	indexPlayer: string;
+}
+
+export interface AttackRequest extends RandomAttackRequest {
 	x: number;
 	y: number;
-	indexPlayer: string;
 }
 
 export interface ServerAttackResponse {

@@ -9,6 +9,7 @@ import { createNewRoom } from '../controllers/createNewRoom';
 import { addUserToRoom } from '../controllers/addUserToRoom';
 import { addShips } from '../controllers/addShips';
 import { attackHandler } from '../controllers/attackHandler';
+import { randomAttackHandler } from '../controllers/randomAttackHandler';
 
 export function startWebSocketServer(port: number) {
 	const websocketServer = new WebSocket.Server({ port });
@@ -48,6 +49,9 @@ export function startWebSocketServer(port: number) {
 						break;
 					case InteractionEnum.Attack:
 						attackHandler(data);
+						break;
+					case InteractionEnum.RandomAttack:
+						randomAttackHandler(data);
 						break;
 				}
 			} catch (error) {

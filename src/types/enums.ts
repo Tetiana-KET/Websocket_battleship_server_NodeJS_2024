@@ -5,6 +5,7 @@ export enum InteractionEnum {
 	CreateGame = 'create_game', //send for both players in the room, after they are connected to the room
 	CreateRoom = 'create_room', //Create new room (create game room and add yourself there)
 	Finish = 'finish', // id of the winner
+	RandomAttack = 'randomAttack',
 	Reg = 'reg',
 	StartGame = 'start_game', //send for both players in the room, after they are connected to the room
 	Turn = 'turn', //who is shooting now
