@@ -15,7 +15,6 @@ export class User {
 	public addGameRoom(roomId: string) {
 		this.rooms.push(roomId);
 	}
-	public joinGameRoom() {}
 
 	public clearRoom() {
 		this.rooms = [];

@@ -40,7 +40,7 @@ export function startWebSocketServer(port: number) {
 					case InteractionEnum.CreateRoom:
 						createNewRoom(idPlayer);
 						break;
-					case InteractionEnum.addUserToRoom:
+					case InteractionEnum.AddUserToRoom:
 						addUserToRoom(idPlayer, data);
 						break;
 					case InteractionEnum.AddShips:

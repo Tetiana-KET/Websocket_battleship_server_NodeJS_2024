@@ -1,8 +1,9 @@
 import { DB } from '../store/store';
-import { AttackResult, InteractionEnum, ShipStatus } from '../types/enums';
+import { AttackResult, ShipStatus } from '../types/enums';
 import { AttackRequest } from '../types/interfaces';
 import { getSurroundingCoordinates } from '../utils/getSurroundingCoordinates';
 import { printMessageToConsole } from '../utils/printMessageToConsole';
+import { handleIsWinner } from './handleIsWinner';
 import { sendAttackResponse } from './sendAttackResponse';
 import { sendTurn } from './sendTurn';
 
@@ -77,6 +78,12 @@ export function attackHandler(data: string) {
 					AttackResult.Miss
 				);
 			});
+
+			/**WINNERS */
+			if (opponentShips) {
+				handleIsWinner(gameId, indexPlayer, game, opponentShips);
+			}
+
 			break;
 	}
 }

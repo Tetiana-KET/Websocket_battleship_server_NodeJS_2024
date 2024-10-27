@@ -50,8 +50,14 @@ export interface UserInterface {
 	password: string;
 	id: string;
 	rooms: string[];
+	winsCount: number;
 	addGameRoom: (id: string) => void;
 	clearRoom: () => void;
+}
+
+export interface WinnerInterface {
+	name: string;
+	wins: number;
 }
 
 // ROOM
@@ -81,6 +87,7 @@ export interface ShipInterface {
 	getStatus: () => ShipStatus;
 }
 
+// GAME
 export interface GameInterface {
 	gameId: string;
 	gameBoard: GameBoardInterface;
