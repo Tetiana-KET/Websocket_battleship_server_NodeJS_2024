@@ -86,11 +86,10 @@ export interface ShipInterface {
 	direction: boolean;
 	type: 'small' | 'medium' | 'large' | 'huge';
 	length: number;
-	shipCellStatus: Map<string, boolean>;
-	getStatus: () => ShipStatus;
+	shipCellStatus?: Map<string, boolean>;
+	getStatus?: () => ShipStatus;
 }
 
-// GAME
 export interface GameInterface {
 	gameId: string;
 	gameBoard: GameBoardInterface;

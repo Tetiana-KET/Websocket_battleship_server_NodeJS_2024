@@ -3,6 +3,7 @@ import { InteractionEnum, ShipStatus } from '../types/enums';
 import { GameInterface, ShipInterface } from '../types/interfaces';
 import { generateWsServerResponse } from '../utils/generateWsServerResponse';
 import { printMessageToConsole } from '../utils/printMessageToConsole';
+import { validateIsBot } from '../utils/validateIsBot';
 import { updateWinners } from './updateWinners';
 
 export function handleIsWinner(
@@ -11,8 +12,13 @@ export function handleIsWinner(
 	game: GameInterface,
 	opponentShips: ShipInterface[]
 ) {
+	const opponentId =
+		DB.gameData.get(gameId)?.players.find(id => id !== indexPlayer) || '';
+
+	const isBot = validateIsBot(opponentId);
+
 	const isWinner = opponentShips?.every(
-		ship => ship.getStatus() === ShipStatus.Killed
+		ship => ship.getStatus?.() === ShipStatus.Killed
 	);
 
 	if (isWinner) {
@@ -26,9 +32,10 @@ export function handleIsWinner(
 		});
 
 		const winner = DB.playerData.get(indexPlayer);
-		if (winner) {
+		if (winner && !isBot) {
 			winner.winsCount += 1;
 		}
+
 		DB.gameData.delete(gameId);
 		printMessageToConsole(
 			`User ${winner?.name} won the game!\nWinner ID: ${indexPlayer}`,

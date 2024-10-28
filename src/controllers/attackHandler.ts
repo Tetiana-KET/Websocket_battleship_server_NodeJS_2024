@@ -18,7 +18,7 @@ export function attackHandler(data: string) {
 	const opponentBoard = game?.gameBoard.get(opponentId || '');
 	const opponentShips = game?.ships.get(opponentId || '');
 	const ship = opponentShips?.find(ship =>
-		ship.shipCellStatus.has(`${x}-${y}`)
+		ship.shipCellStatus?.has(`${x}-${y}`)
 	);
 
 	if (!ship) {
@@ -37,53 +37,59 @@ export function attackHandler(data: string) {
 		return;
 	}
 
-	ship.shipCellStatus.set(`${x}-${y}`, true);
-	const shipStatus = ship.getStatus();
+	ship.shipCellStatus?.set(`${x}-${y}`, true);
+	if (ship.getStatus) {
+		const shipStatus = ship.getStatus();
+
+		switch (shipStatus) {
+			case ShipStatus.Shot:
+				opponentBoard?.set(`${x}-${y}`, true);
+				sendAttackResponse(
+					{ gameId, x, y, indexPlayer },
+					game,
+					AttackResult.Shot
+				);
+
+				break;
+			case ShipStatus.Killed:
+				opponentBoard?.set(`${x}-${y}`, true);
+
+				sendAttackResponse(
+					{ gameId, x, y, indexPlayer },
+					game,
+					AttackResult.Killed
+				);
+				let shipCoordinates;
+				if (ship.shipCellStatus) {
+					shipCoordinates = Array.from(ship.shipCellStatus.keys()).map(
+						key => key.split('-').map(Number) as [number, number]
+					);
+				}
+				if (shipCoordinates) {
+					const surroundingCoordinates =
+						getSurroundingCoordinates(shipCoordinates);
+
+					surroundingCoordinates.forEach(([sx, sy]) => {
+						opponentBoard?.set(`${sx}-${sy}`, true);
+						sendAttackResponse(
+							{ gameId, x: sx, y: sy, indexPlayer },
+							game,
+							AttackResult.Miss
+						);
+					});
+				}
+
+				/**WINNERS */
+				if (opponentShips) {
+					handleIsWinner(gameId, indexPlayer, game, opponentShips);
+				}
+
+				break;
+		}
+	}
 
 	if (game) {
 		game.turn = indexPlayer;
 		sendTurn(game.turn, gameId);
-	}
-
-	switch (shipStatus) {
-		case ShipStatus.Shot:
-			opponentBoard?.set(`${x}-${y}`, true);
-			sendAttackResponse(
-				{ gameId, x, y, indexPlayer },
-				game,
-				AttackResult.Shot
-			);
-
-			break;
-		case ShipStatus.Killed:
-			opponentBoard?.set(`${x}-${y}`, true);
-
-			sendAttackResponse(
-				{ gameId, x, y, indexPlayer },
-				game,
-				AttackResult.Killed
-			);
-
-			const shipCoordinates = Array.from(ship.shipCellStatus.keys()).map(
-				key => key.split('-').map(Number) as [number, number]
-			);
-
-			const surroundingCoordinates = getSurroundingCoordinates(shipCoordinates);
-
-			surroundingCoordinates.forEach(([sx, sy]) => {
-				opponentBoard?.set(`${sx}-${sy}`, true);
-				sendAttackResponse(
-					{ gameId, x: sx, y: sy, indexPlayer },
-					game,
-					AttackResult.Miss
-				);
-			});
-
-			/**WINNERS */
-			if (opponentShips) {
-				handleIsWinner(gameId, indexPlayer, game, opponentShips);
-			}
-
-			break;
 	}
 }

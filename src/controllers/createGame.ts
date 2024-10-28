@@ -26,4 +26,5 @@ export function createGame(indexRoom: string) {
 		player.clearRoom();
 	});
 	DB.gameData.set(game.gameId, game);
+	return game.gameId;
 }

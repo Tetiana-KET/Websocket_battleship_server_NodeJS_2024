@@ -5,9 +5,9 @@ export class Room {
 	public roomId: string;
 	public players: UserInterface[] = [];
 
-	constructor(user: UserInterface) {
+	constructor(users: UserInterface[] = []) {
 		this.roomId = generateID();
-		this.players.push(user);
+		this.players.push(...users);
 	}
 
 	public addUserToRoom(user: UserInterface) {

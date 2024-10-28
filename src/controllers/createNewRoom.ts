@@ -8,7 +8,7 @@ export function createNewRoom(id: string) {
 	const user = DB.playerData.get(id);
 	let room;
 	if (user && user.rooms.length === 0) {
-		room = new Room(user);
+		room = new Room([user]);
 	} else {
 		printMessageToConsole(USER_HAS_ROOM, 'error');
 		return;

@@ -11,6 +11,7 @@ import { addShips } from '../controllers/addShips';
 import { attackHandler } from '../controllers/attackHandler';
 import { randomAttackHandler } from '../controllers/randomAttackHandler';
 import { handleConnectionClose } from '../utils/handleConnectionClose';
+import { singlePlayHandler } from '../controllers/singlePlayHandler';
 
 export function startWebSocketServer(port: number) {
 	const websocketServer = new WebSocket.Server({ port });
@@ -53,6 +54,9 @@ export function startWebSocketServer(port: number) {
 						break;
 					case InteractionEnum.RandomAttack:
 						randomAttackHandler(data);
+						break;
+					case InteractionEnum.SinglePlay:
+						singlePlayHandler(idPlayer);
 						break;
 				}
 			} catch (error) {
