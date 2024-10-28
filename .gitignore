@@ -1,16 +1,35 @@
 # dependencies
 /node_modules
-
-# System Files
-.DS_Store
-Thumbs.db
-[Dd]esktop.ini
+dist
+dist-ssr
+*.local
+dist/*
+.env
 
 # Links
 *.lnk
-.idea/
 *.PEM
-.vscode/
 
 # Logs
-npm-debug.log
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+Thumbs.db
+[Dd]esktop.ini
